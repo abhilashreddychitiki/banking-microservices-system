@@ -6,9 +6,15 @@ spring:
     name: notification-service
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      database: notificationdb
+      uri: mongodb://localhost:27017/notificationdb
+  mongodb:
+    embedded:
+      version: 4.0.2
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 4.0.2
   mail:
     host: smtp.gmail.com
     port: 587
