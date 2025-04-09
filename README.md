@@ -2,6 +2,9 @@
 
 A comprehensive banking system built using a microservices architecture.
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://banking-microservices-demo.up.railway.app)
+[![GitHub stars](https://img.shields.io/github/stars/abhilashreddychitiki/banking-microservices-system?style=social)](https://github.com/abhilashreddychitiki/banking-microservices-system/stargazers)
+
 ## Overview
 
 This project implements a banking system with the following microservices:
@@ -51,6 +54,12 @@ docker-compose up
 ## Development
 
 Each service can be developed and run independently. Refer to the README in each service directory for specific instructions.
+
+## Live Demo
+
+A live demo of the system is available at [https://banking-microservices-demo.up.railway.app](https://banking-microservices-demo.up.railway.app).
+
+For more information about the demo, including test credentials and available features, see [DEMO.md](DEMO.md).
 
 ## Production Deployment
 
