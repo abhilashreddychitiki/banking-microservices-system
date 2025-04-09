@@ -10,7 +10,9 @@ This project implements a banking system with the following microservices:
 - **Transaction Service**: Handles financial transactions (deposits, withdrawals, transfers)
 - **User Service**: Manages user information and authentication
 - **Notification Service**: Handles notifications to users
+- **Auth Service**: Handles authentication and authorization
 - **API Gateway**: Routes requests to appropriate services
+- **Service Registry**: Service discovery with Eureka
 
 ## Architecture
 
@@ -33,8 +35,7 @@ The system is built using a microservices architecture, with each service having
 
 - Docker and Docker Compose
 - Java 17+
-- Node.js 18+
-- Maven/Gradle
+- Maven
 
 ### Running Locally
 
@@ -50,6 +51,29 @@ docker-compose up
 ## Development
 
 Each service can be developed and run independently. Refer to the README in each service directory for specific instructions.
+
+## Production Deployment
+
+For production deployment instructions, see [PRODUCTION.md](PRODUCTION.md).
+
+The production deployment includes:
+
+- Containerization with Docker
+- Orchestration with Docker Compose (can be extended to Kubernetes)
+- Monitoring with Prometheus and Grafana
+- Centralized logging with ELK Stack
+- SSL/TLS encryption
+- Environment-specific configurations
+- Scaling capabilities
+
+## Security Features
+
+- JWT-based authentication
+- Role-based access control
+- API rate limiting
+- Circuit breakers for resilience
+- Secure password storage with BCrypt
+- HTTPS for all external communication
 
 ## License
 
