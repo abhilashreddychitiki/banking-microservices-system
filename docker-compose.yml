@@ -1,0 +1,162 @@
+version: "3.8"
+
+services:
+  # Service Registry
+  eureka-server:
+    build: ./services/service-registry
+    ports:
+      - "8761:8761"
+    networks:
+      - banking-network
+
+  # API Gateway
+  api-gateway:
+    build: ./services/api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - eureka-server
+      - user-service
+      - account-service
+      - transaction-service
+      - notification-service
+    networks:
+      - banking-network
+
+  # User Service
+  user-service:
+    build: ./services/user-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-db:5432/userdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    depends_on:
+      - eureka-server
+      - user-db
+      - rabbitmq
+    networks:
+      - banking-network
+
+  # Account Service
+  account-service:
+    build: ./services/account-service
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://account-db:5432/accountdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    depends_on:
+      - eureka-server
+      - account-db
+      - rabbitmq
+    networks:
+      - banking-network
+
+  # Transaction Service
+  transaction-service:
+    build: ./services/transaction-service
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://transaction-db:5432/transactiondb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    depends_on:
+      - eureka-server
+      - transaction-db
+      - rabbitmq
+    networks:
+      - banking-network
+
+  # Notification Service
+  notification-service:
+    build: ./services/notification-service
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - eureka-server
+      - rabbitmq
+    networks:
+      - banking-network
+
+  # MongoDB for Notification Service
+  mongodb:
+    image: mongo:5.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - banking-network
+
+  # Databases
+  user-db:
+    image: postgres:14-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=userdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - user-db-data:/var/lib/postgresql/data
+    networks:
+      - banking-network
+
+  account-db:
+    image: postgres:14-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=accountdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - account-db-data:/var/lib/postgresql/data
+    networks:
+      - banking-network
+
+  transaction-db:
+    image: postgres:14-alpine
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_DB=transactiondb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - transaction-db-data:/var/lib/postgresql/data
+    networks:
+      - banking-network
+
+  # Message Broker
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - banking-network
+
+networks:
+  banking-network:
+    driver: bridge
+
+volumes:
+  user-db-data:
+  account-db-data:
+  transaction-db-data:
+  mongodb-data:
