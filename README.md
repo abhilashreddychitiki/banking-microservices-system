@@ -48,6 +48,14 @@ cd banking-microservices-system
 docker-compose up
 ```
 
+### Live Demo
+
+A live demo of the Banking Microservices System is deployed on Railway and can be accessed at:
+
+- Service Registry: [https://banking-microservices-system-production.up.railway.app](https://banking-microservices-system-production.up.railway.app)
+
+For more information about the Railway deployment, see [RAILWAY.md](RAILWAY.md).
+
 ## Development
 
 Each service can be developed and run independently. Refer to the README in each service directory for specific instructions.
