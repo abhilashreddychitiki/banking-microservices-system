@@ -20,5 +20,5 @@ COPY --from=build /workspace/app/target/*.jar app.jar
 # Expose the port
 EXPOSE 8761
 
-# Run the application with the railway profile
-ENTRYPOINT ["java", "-jar", "app.jar", "--spring.profiles.active=railway"]
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
