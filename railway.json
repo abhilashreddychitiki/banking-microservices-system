@@ -2,15 +2,14 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "DOCKERFILE",
-    "dockerfilePath": "services/service-registry/Dockerfile",
-    "contextPath": "services/service-registry"
+    "dockerfilePath": "services/banking-demo/Dockerfile",
+    "contextPath": "services/banking-demo"
   },
   "deploy": {
     "numReplicas": 1,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10,
     "healthcheckPath": "/actuator/health",
-    "healthcheckTimeout": 300,
-    "startCommand": "java -jar app.jar --spring.profiles.active=railway"
+    "healthcheckTimeout": 300
   }
 }

@@ -52,7 +52,14 @@ docker-compose up
 
 A live demo of the Banking Microservices System is deployed on Railway and can be accessed at:
 
-- Service Registry: [https://banking-microservices-system-production.up.railway.app](https://banking-microservices-system-production.up.railway.app)
+- Banking Demo: [https://banking-microservices-system-production.up.railway.app](https://banking-microservices-system-production.up.railway.app)
+
+This demo showcases the core banking functionality including:
+
+- User registration and authentication
+- Account management
+- Deposits, withdrawals, and transfers
+- Transaction history
 
 For more information about the Railway deployment, see [RAILWAY.md](RAILWAY.md).
 

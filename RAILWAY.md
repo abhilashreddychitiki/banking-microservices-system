@@ -6,74 +6,67 @@ This document provides information about the Railway deployment of the Banking M
 
 The Banking Microservices System is deployed on Railway and can be accessed at:
 
-- Service Registry: [https://banking-microservices-system-production.up.railway.app](https://banking-microservices-system-production.up.railway.app)
+- Banking Demo: [https://banking-microservices-system-production.up.railway.app](https://banking-microservices-system-production.up.railway.app)
 
-## Architecture
+## Current Deployment
 
-The Railway deployment includes the following services:
+Currently, we have deployed a simplified Banking Demo application that showcases the core functionality of the system. This demo is a standalone application that doesn't require the full microservices infrastructure, making it easier to deploy and demonstrate.
+
+### Banking Demo Features
+
+- User registration and authentication
+- Account management (create and view accounts)
+- Financial transactions (deposits, withdrawals, and transfers)
+- Transaction history
+
+### Technical Details
+
+- **Framework**: Spring Boot 3.1.0
+- **Database**: H2 (in-memory)
+- **Security**: Spring Security
+- **Frontend**: Thymeleaf templates with Bootstrap 5
+- **Deployment**: Docker container on Railway
+
+## Future Architecture
+
+In the future, we plan to deploy the full microservices architecture, including:
 
 1. **Service Registry (Eureka)**: Service discovery server
 2. **API Gateway**: Entry point for all client requests
 3. **User Service**: Manages user accounts and authentication
 4. **Account Service**: Manages bank accounts
 
-## Testing the API
+## Using the Banking Demo
 
-You can test the API using the following endpoints:
+You can use the Banking Demo by following these steps:
 
-### User Service
+1. **Register a new account**:
 
-```
-# Register a new user
-POST /api/users/auth/signup
-{
-  "username": "testuser",
-  "email": "test@example.com",
-  "password": "password123",
-  "firstName": "Test",
-  "lastName": "User",
-  "phoneNumber": "1234567890"
-}
+   - Go to the registration page
+   - Fill in your details (username, email, password, name, etc.)
+   - Submit the form
 
-# Login
-POST /api/users/auth/signin
-{
-  "username": "testuser",
-  "password": "password123"
-}
-```
+2. **Log in**:
 
-### Account Service
+   - Enter your username and password
+   - Click the login button
 
-```
-# Create a new account (requires authentication)
-POST /api/accounts
-{
-  "userId": 1,
-  "accountType": "CHECKING",
-  "initialDeposit": 1000.00,
-  "currency": "USD"
-}
+3. **Create a bank account**:
 
-# Get account details
-GET /api/accounts/{accountId}
+   - From the dashboard, click "Create New Account"
+   - Select the account type (Checking, Savings, Credit)
+   - Set the currency
+   - Submit the form
 
-# Deposit money
-POST /api/accounts/deposit
-{
-  "accountNumber": "1234567890",
-  "amount": 500.00,
-  "description": "Deposit"
-}
+4. **Perform transactions**:
 
-# Withdraw money
-POST /api/accounts/withdraw
-{
-  "accountNumber": "1234567890",
-  "amount": 200.00,
-  "description": "Withdrawal"
-}
-```
+   - **Deposit**: Add funds to your account
+   - **Withdraw**: Remove funds from your account
+   - **Transfer**: Move funds between accounts
+
+5. **View transaction history**:
+   - Click on an account to see its details
+   - View the list of transactions for that account
 
 ## Notes
 
